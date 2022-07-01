@@ -1,0 +1,28 @@
+<div class="mt-4">
+    <a href="/home/insert" class="btn btn-primary position-relative top-0 btn-add">Thêm nhân viên mới</a>
+    <div class="row">
+        {{#each empObject}}
+        <div class="col-sm-6 col-lg-4">
+            <div class="card card-course-item">
+                <a href="/details/{{this._id}}">
+                <img src="{{this.image}}" class="card-img-top" style="height: 500px; object-fit:cover" alt="{{this.name}}">
+                </a>
+                <div class="card-body">
+                    <ul class="nav justify-content-between mt-4 mb-4">
+                        <a href="/details/{{this._id}}">
+                            <h5 class="card-title">{{this.name}}</h5>
+                        </a>
+                        <a class="btn btn-primary position-relative top-0 btn-add" href="/update/{{this._id}}">
+                            Sửa
+                        </a>
+                    </ul>
+                    <p class="card-text">{{this.description}}</p>
+                
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+<script>
+</script>

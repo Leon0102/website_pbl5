@@ -1,0 +1,50 @@
+<ul class="nav justify-content-center mt-4 mb-4">
+  <li class="nav-item">
+    <h2 class='mb-3'>Lịch sử điểm danh</h2>
+  </li>
+</ul>
+<form method="POST" action="/history">
+  <ul class="nav justify-content-center">
+    <li class="nav-item" style="margin:0 10px; display: inline-flex;">
+    <h4 class='mb-3 me-3 '>From </h4>
+      <input type="date" class="form-control" id="date-in" name="timeIn" style="height: fit-content;">
+    </li>
+    <li  class="nav-item" style="margin:0 10px; display: inline-flex;">
+    <h4 class='mb-3 me-3'>To</h4>
+      <input type="date" class="form-control" id="date-out" name="timeOut"style="height: fit-content;">
+    </li>
+    <li class="nav-item"style="margin:0 10px; display: inline-flex;">
+      <button type="submit" class="btn btn-primary" style="display: block;
+    position: relative;
+    top: -4px;">Xem</button>
+    </li>
+  </ul>
+</form>
+<br>
+<table id="dtBasicExample" class="table" width="100%">
+  <thead>
+    <tr>
+      <th class="th-sm">Name
+      </th>
+      <th class="th-sm">MSSV
+      </th>
+      <th class="th-sm">Time
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each hisObject}}
+    <tr>
+      <td>{{this.name}}</td>
+      <td>{{this.createdBy}}</td>
+      <td>{{this.time_In}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+  $('#dtBasicExample').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+});
+</script>

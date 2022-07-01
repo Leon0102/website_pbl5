@@ -1,0 +1,56 @@
+<div class="mt-4">
+    <div class="row">
+        <div class="col-lg-8">
+              <img src="{{empObject.image}}" class="card-img-top rounded" style="height: 700px; object-fit:cover" alt="{{empObject.name}}">
+        </div>
+        <div class="col-lg-4">
+            <h2>{{empObject.name}}</h2>
+            <ul class="list-group basic_info">
+                <a class="list-group-item list-group-item-action user-birthday" href="#">
+                    <i class="icon bi-calendar" style="font-size: 1.5rem; color: rgb(10, 79, 206);"></i>
+                </a>
+                <a class="list-group-item list-group-item-action" href='#'>
+                    <i class="icon bi-telephone" style="font-size: 1.5rem; color: rgb(10, 79, 206);"></i>
+                {{empObject.phoneNumber}}</a>
+                <a class="list-group-item list-group-item-action" href="#">
+                    <i class="icon bi-card-text" style="font-size: 1.5rem; color: rgb(10, 79, 206);"></i>
+                    {{empObject.email}}</a>
+            </ul>
+            <ul class="nav justify-content-center">
+                <li  class="nav-item"><a class="nav-link" href="#">
+                    <i class="bi-facebook" style="font-size: 3rem; color: rgb(10, 79, 206);"></i>
+                </a></li>
+                <li  class="nav-item"><a class="nav-link" href="#">
+                    <i class="bi-twitter" style="font-size: 3rem; color: rgb(10, 79, 206);"></i>
+                </a></li>
+                <li  class="nav-item"><a class="nav-link" href="#">
+                    <i class="bi-linkedin" style="font-size: 3rem; color: rgb(10, 79, 206);"></i>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    var date = '{{empObject.birthday}}';
+    var date = date.split(' ')
+    var date = date[1] + ' ' + date[2] + ' ' + date[3]
+    $('.user-birthday').append(date);
+</script>
+
+
+<style>
+    h2{
+        text-align: center;
+    }
+    .basic_info{
+        list-style: none;
+    }
+    .list-text{
+        font-size: 1.5rem;
+        display:flex;
+        align-items: center;
+    }
+    .icon{
+        margin-right: 1.5rem;
+    }
+</style>

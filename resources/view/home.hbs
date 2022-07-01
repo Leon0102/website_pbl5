@@ -1,0 +1,124 @@
+<style>
+  .btn-click:hover{
+    cursor: pointer;
+  }
+</style>
+
+
+<ul class="nav justify-content-center mt-4 mb-4">
+  <li class="nav-item">
+    <h3>Danh sách điểm danh hôm nay</h3>
+  </li>
+</ul>
+
+<table class="table table align-middle mb-0 bg-white" id="data-table">
+  <thead class="bg-light">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Thời gian vào</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each empObject}}
+    <tr>
+      <th scope="row">{{this.mssv}}</th>
+      <td>
+         <div class="d-flex align-items-center">
+          <img
+              src={{this.image}}
+              alt=""
+              style="width: 45px; height: 45px"
+              class="rounded-circle"
+              />
+          <div class="ms-3">
+            <p class="fw-bold mb-1 btn-click" data-mdb-toggle="modal" data-mdb-target="#exampleModal">{{this.name}}</p>
+          </div>
+        </div>
+      </td>
+      <td>
+            {{#if (checkToday this.time_In)}}
+            <span class="badge badge-success">Điểm danh</span>
+            {{else}}
+            <span class="badge badge-danger">Chưa điểm danh</span>
+            {{/if}}
+      </td>
+      {{#if (checkToday this.time_In)}}
+      <td class = "time-in">{{this.time_In}}</td> 
+      {{else}}
+      <td class = "time-in">Not yet</td> 
+      {{/if}}
+      <th><a href="" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#delete-user-modal" data-id="{{this._id}}">Xóa</a></th>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</form>
+
+
+{{!-- Confirm delete user --}}
+<div class="modal fade" id="delete-user-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xóa nhân viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-del-user" type="button" class="btn btn-danger">Xóa bỏ</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- Delete hidden form --}}
+<form method="POST" name ="form-delete"></form>
+
+<style>
+  .date-choice{
+    display: flex;
+    align-items: center;
+  }
+  .input-date{
+    margin-right: 2rem;
+  }
+</style>
+<script  type="text/javascript" async>
+  
+    const exampleModal = document.getElementById('delete-user-modal')
+    const btnDelUser = document.getElementById('btn-del-user');
+
+    var courseId = null;
+    var deleteForm = document.forms['form-delete'];
+    var checkAllSubmitBtn =$('.btn-check-all-submit ');
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+
+        var button = event.relatedTarget
+
+        courseId = button.getAttribute('data-id')
+    });
+
+    btnDelUser.addEventListener('click', function () {
+        deleteForm.action = '/home/' + courseId + '?_method=DELETE';
+        deleteForm.submit();
+    }); 
+
+    function autoRefreshPage()
+    {
+        $.ajax({
+            url: '/home',
+            type: 'GET',
+            success: function(response) {
+                $('#data-table').load(location.href + ' #data-table');
+            }
+        });
+    }
+    setInterval('autoRefreshPage()', 2000);
+
+  
+</script>
